@@ -1,0 +1,336 @@
+/* ====================== XÓA KHOẢNG TRẮNG ĐẦU TRANG ====================== */
+.no-header-layout .main-content,
+.no-header-main {
+    padding: 0 !important;
+    margin: 0 !important;
+    min-height: auto !important;          /* Quan trọng: không ép full height */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Đảm bảo toàn bộ trang co giãn đúng */
+.app-container.no-header-layout {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Footer luôn ở dưới cùng, không bị đẩy xa */
+.app-container.no-header-layout > footer {
+    margin-top: auto;                     /* Đẩy footer xuống đáy */
+}
+
+/* Cart page - không tạo padding/margin thừa ở dưới */
+.cart-page {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px 0 40px 0;               /* Chỉ giữ padding nhỏ dưới cùng */
+    flex: 1;                              /* Chiếm hết không gian còn lại */
+    border: 1px solid dark turquoise;
+}
+
+/* Footer của cart (thanh tổng kết) */
+.cart-footer {
+    margin-top: 30px;                     /* Giảm margin-top xuống */
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.06);
+}
+
+/* Nếu bạn muốn footer trang web (Footer component) sát hơn */
+footer {
+    margin-top: 0 !important;
+    padding-top: 20px;
+}
+/* Đầu trang Cart */
+.cart-page {
+    width: 80%;
+    margin: 40px auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    background-color: #fdfdfd;
+    margin-top: 0%; 
+    padding: 10px; 
+}
+
+.cart-logo-wrapper {
+    display: flex;
+    align-items: center; /* Căn giữa tất cả các thành phần theo chiều dọc */
+    gap: 15px;      /* Tạo khoảng cách đều giữa logo, gạch đứng và chữ */
+}
+
+.cart-logo-wrapper img {
+    width: 120px;
+    height: 70px;        /* Điều chỉnh chiều cao logo cho cân đối */
+    display: block;      /* Loại bỏ khoảng trống thừa dưới ảnh của thẻ inline */
+    margin-top: 0%;
+    border-radius: 3px; 
+}
+
+.cart-logo-wrapper .divider {
+    font-size: 30px;     /* Kích thước thanh gạch đứng */
+    color: #ffffff;         /* Màu của thanh gạch */
+    font-weight: 300;    /* Độ dày thanh gạch */
+    margin-top: 0%;
+    align-items: center;
+}
+
+.cart-logo-wrapper .cart-title-name {
+    font-size: 22px;     /* Kích thước chữ GIỎ HÀNG */
+    font-weight: bold;
+    color: #6f6f6f;
+    text-transform: uppercase;
+    letter-spacing: 1px; /* Khoảng cách giữa các chữ cái cho thoáng hơn */
+}
+
+/* 1. Header Giỏ hàng */
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #ffffff;
+    margin-bottom: 30px;
+    border-radius: 10px;  
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    padding: 10px; 
+    background-color: #01837f;
+}
+
+.header-left {
+    font-size: 24px;
+    font-weight: bold;
+    height: auto;
+    padding: 15px;
+}
+
+.cart-logo-wrapper .logo {
+    width: 120px;
+    height: 70px;        /* Điều chỉnh chiều cao logo cho cân đối */
+    display: block;      /* Loại bỏ khoảng trống thừa dưới ảnh của thẻ inline */
+    margin-top: 0%;
+    border-radius: 3px; 
+}
+.header-left a {
+    color: #ff4757; /* Màu logo */
+    text-decoration: none;
+}
+
+.header-left span {
+    font-size: 20px;
+    color: #555;
+    margin-left: 10px;
+}
+.cart-title {
+    color: #193797;
+}
+
+.header-search .search-box {
+    display: flex;
+    align-items: center;
+    background: #f4f4f4;
+    padding: 8px 15px;
+    border-radius: 20px;
+}
+
+.header-search input {
+    border: none;
+    background: transparent;
+    outline: none;
+    padding-right: 10px;
+    width: 250px;
+}
+
+/* 2. Bảng danh sách sản phẩm */
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.cart-table th {
+    text-align: left;
+    padding: 15px;
+    background: #fafafa;
+    border-bottom: 1px solid #eee;
+    color: #777;
+    font-weight: 600;
+}
+
+.cart-table td {
+    padding: 20px 15px;
+    border-bottom: 1px solid #f9f9f9;
+    vertical-align: middle;
+}
+
+/* Cột Sản phẩm */
+.prod-col {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.prod-col img {
+    border-radius: 5px;
+    object-fit: cover;
+    border: 1px solid #eee;
+}
+
+.prod-info .p-name {
+    font-weight: 600;
+    margin: 0;
+    font-size: 16px;
+}
+
+.prod-info .p-type {
+    font-size: 13px;
+    color: #999;
+    margin: 4px 0 0 0;
+}
+
+/* Cột Số lượng */
+.cart-qty-actions {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    width: fit-content;
+    border-radius: 4px;
+}
+
+.cart-qty-actions button {
+    border: none;
+    background: #fff;
+    padding: 5px 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: background 0.2s;
+}
+.cart-qty-actions button:hover {
+    background: #f0f0f0;
+}
+
+.cart-qty-actions input {
+    width: 40px;
+    text-align: center;
+    border: none;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    outline: none;
+    font-weight: bold;
+}
+
+/* Thao tác xóa */
+.btn-carts-remove {
+    background: none;
+    border: none;
+    color: #ff4757;
+    cursor: pointer;
+    font-size: 18px;
+    transition: transform 0.2s;
+}
+
+.btn-remove:hover {
+    transform: scale(1.2);
+}
+
+/* 3. Thanh tổng kết (Footer) */
+.cart-footer {
+    margin-top: 40px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 30px;
+    padding: 25px;
+    background: #fff;
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
+    border-radius: 8px;
+    position: sticky;
+    bottom: 0;
+}
+
+.summary {
+    font-size: 18px;
+}
+
+.total-price {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff4757;
+    margin-left: 10px;
+}
+
+.btn-checkout {
+    background: #40c9ff;
+    color: white;
+    border: none;
+    padding: 12px 40px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-checkout:hover {
+    background: #16ce22;
+}
+
+.btn-checkout:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.empty-cart {
+    text-align: center;
+    padding: 100px 0;
+    font-size: 18px;
+    color: #999;
+}
+/* Cập nhật trở về chi tiết */  
+/* Clickable cell cho sản phẩm */
+.product-cell.clickable {
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.product-cell.clickable:hover {
+    background: #f0f7ff;
+}
+
+/* Table */ 
+.cart-table {
+  display: table;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.cart-table tr {
+  display: table-row;
+}
+
+.cart-table td, 
+.cart-table th {
+  display: table-cell;
+  vertical-align: middle;
+}
+/* Ảnh sản phẩm trong giỏ */
+.carts-product-img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-right: 15px;
+}
+
+/* Tên sản phẩm nổi bật hơn */
+.carts-product-name {
+    font-weight: 600;
+    margin: 0;
+    color: #1e40af;
+}
+
+.carts-product-info {
+    display: flex;
+    align-items: center;
+}

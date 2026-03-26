@@ -1,0 +1,404 @@
+/* --- CONTAINER CHÍNH --- */
+.admin-orders-page {
+    padding: 20px;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+}
+
+.order-container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+h1{
+    color: #000856;
+    margin-bottom: 20px;
+    margin-top: 0%;
+}
+/* --- PHẦN TỔNG QUAN (BADGES) --- */
+/* Thu gọn container chứa các thẻ */
+.summary-boxes {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+/* Thu gọn chiều cao và padding của thẻ xuống 2/3 */
+.summary-card {
+    flex: 1;
+    padding: 10px 15px; /* Giảm padding từ khoảng 20-30px xuống 10px */
+    border-radius: 8px;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s;
+    min-height: 80px; /* Khống chế chiều cao tối thiểu thấp hơn */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border: #9d9d9d solid 1px;
+}
+
+/* Thu nhỏ font chữ tiêu đề */
+.summary-card h4 {
+    margin: 0;
+    font-size: 0.9rem; /* Giảm cỡ chữ tiêu đề */
+    text-transform: uppercase;
+    font-weight: 600;
+    opacity: 0.9;
+}
+
+/* Thu nhỏ font chữ số liệu */
+.summary-card p {
+    margin: 5px 0 0 0;
+    font-size: 1.5rem; /* Giảm cỡ chữ số từ 2rem+ xuống 1.5rem */
+    font-weight: bold;
+}
+
+/* Hiệu ứng khi di chuột */
+.summary-card:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.1);
+}
+
+/* Giữ nguyên màu sắc theo mã hiện tại của bạn */
+.summary-card.total { background-color: #000856; }
+.summary-card.unviewed { background-color: #ff4d4f; }
+.summary-card.approved { background-color: #01cf5a; }
+.summary-card.pending { background-color: #f7ff13; color: #333; }
+
+/* --- THANH TÌM KIẾM --- */
+.search-container {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.search-container input {
+    width: 93%;
+    padding: 12px 40px;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    font-size: 16px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+}
+
+/* --- DANH SÁCH ĐƠN HÀNG (BOX STYLE) --- */
+.order-box {
+    border: 1px solid #eee;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    transition: all 0.3s;
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+    background: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    margin-bottom: 0px; 
+    height: 40px; 
+}
+.icon-open-close {
+    border: 1px solid rgb(157, 157, 157); 
+    color: #737373;
+    background-color: white;
+    border-radius: 5px; 
+    align-items: center;  
+    line-height: 10px;
+    padding: 10px; 
+
+}
+
+.order-header:hover { background: #f0f7ff; }
+
+.order-header .stt { width: 40px; color: #888; }
+.order-header .name { flex: 1; font-size: 17px; }
+
+/* --- CHI TIẾT ĐƠN HÀNG (KHI NHẤN DẤU +) --- */
+.order-detail {
+    padding: 25px;
+    background: #fafafa;
+    border-top: 1px dashed #ddd;
+}
+
+.customer-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    font-size: 15px;
+}
+.customer-info p {
+    margin-top: 0%;
+    margin-bottom: 10px; 
+}
+.order-items-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    margin-bottom: 15px;
+
+    /* Buộc giữ layout bảng - chống override */
+    display: table !important;
+    table-layout: auto !important;
+}
+
+.order-items-table thead,
+.order-items-table tbody {
+    display: table-header-group !important; /* hoặc table-row-group */
+}
+
+.order-items-table tr {
+    display: table-row !important;
+}
+
+.order-items-table th,
+.order-items-table td {
+    display: table-cell !important;
+    padding: 12px 10px;          /* tăng padding cho đẹp hơn */
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: middle;
+    text-align: center;          /* hoặc left tùy thiết kế */
+}
+
+/* Ảnh - giữ nguyên nhưng tăng kích thước mặc định cho dễ nhìn */
+.order-items-table img {
+    width: 80px;                 /* tăng từ 50px lên cho rõ */
+    height: 100px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #eee;      /* thêm viền nhẹ cho chuyên nghiệp */
+}
+
+.total-price-row {
+    text-align: right;
+    font-size: 18px;
+    font-weight: bold;
+    color: #ff4d4f;
+    margin: 15px 0;
+}
+
+/* --- NÚT BẤM THAO TÁC --- */
+.order-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.btn-approve { background: #01cf5a; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
+.btn-reject { background: #ff4d4f; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
+.btn-cancel-order { background: #888; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
+
+.btn-approve:hover { background: #01a849; }
+.btn-reject:hover { background: #d32f2f; }
+
+.revenue-content {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.filter-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f4f4f4;
+    padding: 30px;
+    border: 1px solid rgb(184, 184, 184);
+    border-radius: 8px;
+
+}
+.filter-row section {
+    padding: 10px;
+    border: 1px solid rgb(223, 223, 223);
+    border-radius: 5px;
+}
+.compare-selects select {
+    padding: 10px;
+    border: 1px solid rgb(223, 223, 223);
+    border-radius: 5px;
+}
+.compare-selects label {
+    margin-left: 15px;
+    margin-right: 5px;
+    font-size: 15px;  
+    font-weight: bold;
+}
+.stats-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.stats-table th {
+    background: #000856;
+    color: white;
+    padding: 12px;
+}
+
+.stats-table td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+}
+
+.ranking-col h3 {
+    color: #000856;
+    border-left: 5px solid #01cf5a;
+    padding-left: 10px;
+}
+.no-data-message {
+    text-align: center;
+    padding: 20px;
+}
+
+.empty-box {
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+    background: #f9f9f9;
+    color: #888;
+    font-style: italic;
+}
+
+.charts-flex {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.chart-item {
+    flex: 1;
+    min-width: 300px;
+}
+tab-navigation button {
+    background: none;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #9d9d9d;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s;
+}
+tab-navigation button.active {
+    color: #000856;
+    border-bottom: 2px solid #000856;
+}
+
+/* Bổ sung thêm vào cập nhật */  
+/* Thêm vào cuối file admin-order.css */
+
+.status-badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    margin-right: 10px;
+}
+
+.status-badge.approved {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.status-badge.pending {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+}
+
+.status-badge.rejected,
+.status-badge.cancelled {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Animation cho đơn hàng bị xóa */
+.order-box.removing {
+    animation: slideOut 0.3s ease forwards;
+}
+
+@keyframes slideOut {
+    0% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-100%);
+        display: none;
+    }
+}
+
+/* Style cho nút đã duyệt */
+.btn-approved {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: default;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn-approved svg {
+    font-size: 14px;
+}
+
+/* Style cho nút đã từ chối */
+.btn-rejected {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: default;
+}
+
+/* Style cho nút khi bị disabled */
+.btn-approve:disabled,
+.btn-reject:disabled,
+.btn-cancel-order:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Highlight cho summary card đang active */
+.summary-card.active {
+    border: 2px solid #007bff;
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0,123,255,0.2);
+}
+
+.order-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 15px;
+}

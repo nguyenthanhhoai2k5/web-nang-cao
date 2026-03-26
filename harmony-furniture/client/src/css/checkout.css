@@ -1,0 +1,311 @@
+/* checkout.css */
+
+.checkout-page {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px 0;
+    font-family: Arial, sans-serif;
+}
+
+.checkout-header {
+    display: flex;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 30px;
+    padding: 15px; 
+    border: 1px solid #bcbcbc;
+    border-radius: 10px;
+    box-shadow: #333;  
+    background-color: #01837f;
+}
+
+.checkout-header .logo {
+    width: 120px;
+    height: 70px;        /* Điều chỉnh chiều cao logo cho cân đối */
+    display: block;      /* Loại bỏ khoảng trống thừa dưới ảnh của thẻ inline */
+    margin-top: 0%;
+    border-radius: 3px; 
+}
+
+.checkout-header .divider {
+    font-size: 30px;     /* Kích thước thanh gạch đứng */
+    color: #333;         /* Màu của thanh gạch */
+    font-weight: 300;    /* Độ dày thanh gạch */
+    margin-top: 0%;
+    align-items: center;
+    margin-left: 10px; 
+    margin-right: 10px; 
+}
+
+.checkout-header .title {
+    font-size: 22px;     /* Kích thước chữ GIỎ HÀNG */
+    font-weight: bold;
+    color: #6f6f6f;
+    text-transform: uppercase;
+    letter-spacing: 1px; /* Khoảng cách giữa các chữ cái cho thoáng hơn */
+}
+
+/* Bảng sản phẩm */
+.checkout-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+    background: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    table-layout: auto; /* tránh bị ép width từ global CSS */
+}
+
+.checkout-table tr {
+    display: table-row !important; /* ép về dạng row */
+    vertical-align: middle !important;
+}
+
+.checkout-table thead {
+    background-color: #f8f9fa;
+}
+
+.checkout-table th {
+    font-weight: 600;
+    color: #555;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.checkout-table td,
+.checkout-table th {
+    display: table-cell !important; /* ép về dạng cell */
+    padding: 15px 10px;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+    text-align: left;
+    color: #333;
+}
+
+.checkout-table .prod-info {
+    display: flex;
+    align-items: flex-start; /* hoặc center tùy ý */
+    gap: 15px;
+}
+
+.checkout-table .prod-info img {
+    border-radius: 5px;
+    object-fit: cover;
+    width: 100px;
+    height: 100px;
+    align-items: 10px; 
+    margin-bottom: 0%;
+    margin-top: 0%;
+}
+
+.checkout-table .prod-info p {
+    margin: 0 0 5px 0;
+    font-weight: 500;
+    color: #333;
+}
+
+.checkout-table .prod-info small {
+    color: #777;
+    font-size: 13px;
+}
+
+/* Giá sản phẩm */
+.price-cell {
+    min-width: 120px;
+}
+
+.original-price {
+    color: #999;
+    text-decoration: line-through;
+    font-size: 13px;
+}
+
+.sale-price {
+    color: #e44d2e;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.current-price {
+    color: #333;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.subtotal {
+    color: #e44d2e;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+/* Nút xóa */
+.checkout-table button {
+    padding: 6px 12px;
+    background-color: #fff;
+    color: #dc3545;
+    border: 1px solid #dc3545;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 13px;
+}
+
+.checkout-table button:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Phần thông tin giao hàng */
+.shipping-section {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+.shipping-section h3 {
+    margin: 0 0 20px 0;
+    color: #333;
+    font-size: 18px;
+    font-weight: 600;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+/* Hiển thị địa chỉ */
+.address-display {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 6px;
+}
+
+.address-display p {
+    margin: 10px 0;
+    color: #555;
+}
+
+.address-display p strong {
+    min-width: 100px;
+    display: inline-block;
+    color: #333;
+}
+
+.address-display button {
+    margin-top: 15px;
+    padding: 8px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.address-display button:hover {
+    background-color: #0056b3;
+}
+
+/* Form địa chỉ */
+.address-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.address-form input,
+.address-form textarea {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+.address-form input:focus,
+.address-form textarea:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.address-form textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.address-form button {
+    padding: 12px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.address-form button:hover {
+    background-color: #218838;
+}
+
+/* Footer thanh toán */
+.checkout-footer {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.checkout-footer h2 {
+    margin: 0;
+    color: #e44d2e;
+    font-size: 24px;
+}
+
+.btn-order {
+    padding: 15px 40px;
+    background-color: #e44d2e;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-order:hover {
+    background-color: #c13e22;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .checkout-page {
+        width: 95%;
+        padding: 10px;
+    }
+
+    .checkout-table {
+        font-size: 14px;
+    }
+
+    .checkout-table th:nth-child(2),
+    .checkout-table th:nth-child(4),
+    .checkout-table td:nth-child(2),
+    .checkout-table td:nth-child(4) {
+        display: none;
+    }
+
+    .checkout-footer {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .btn-order {
+        width: 100%;
+    }
+}

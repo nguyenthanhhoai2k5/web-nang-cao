@@ -1,0 +1,191 @@
+.my-orders-page {
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 30px;
+}
+
+.orders-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    background-color: #01837f;
+    padding: 15px;
+    border-radius: 8px;
+    color: white;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.header-left img {
+    width: 120px; 
+    height: 100px;
+    margin-right: 10px;
+}
+
+.header-left .logo { height: 50px; }
+
+.header-right .search-box {
+    display: flex;
+    align-items: center;
+    background: #f1f1f1;
+    padding: 8px 15px;
+    border-radius: 20px;
+}
+
+.order-card {
+    background: #fff;
+    border: 1px solid #eee;
+    margin-bottom: 25px;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.order-date {
+    font-weight: bold;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+/* ====================== ORDER TABLE - BẢO VỆ LAYOUT ====================== */
+.order-table {
+    width: 100%;
+    border-collapse: collapse !important;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 16px 0;
+
+    /* Buộc giữ layout table - rất quan trọng */
+    display: table !important;
+    table-layout: auto;
+}
+
+.order-table thead,
+.order-table tbody {
+    display: table-header-group !important;
+}
+
+.order-table tr {
+    display: table-row !important;
+}
+
+.order-table th,
+.order-table td {
+    display: table-cell !important;
+    padding: 14px 12px;
+    border-bottom: 1px solid #e2e8f0;
+    vertical-align: middle;
+}
+
+/* ==================== HEADER ==================== */
+.order-table thead th {
+    background: #a3d0fc;
+    color: #334155;
+    font-weight: 600;
+    text-align: center;
+    white-space: nowrap;
+    border-bottom: 2px solid #cbd5e1;
+}
+
+/* ==================== CÁC CỘT CỤ THỂ ==================== */
+.order-table th:nth-child(1),   /* Sản phẩm */
+.order-table td:nth-child(1) {
+    text-align: left;
+    min-width: 320px;
+}
+
+.order-table th:nth-child(2),   /* Giá */
+.order-table td:nth-child(2),
+.order-table th:nth-child(3),   /* Số lượng */
+.order-table td:nth-child(3),
+.order-table th:nth-child(4),   /* Tổng tiền */
+.order-table td:nth-child(4) {
+    text-align: right;
+    width: 130px;
+}
+
+.order-table th:nth-child(5),   /* Trạng thái */
+.order-table td:nth-child(5) {
+    text-align: center;
+    width: 140px;
+}
+
+.order-table th:nth-child(6),   /* Thao tác */
+.order-table td:nth-child(6) {
+    text-align: center;
+    width: 120px;
+}
+
+/* ==================== CỘT SẢN PHẨM (có ảnh + tên) ==================== */
+.prod-col {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    display: block;
+}
+
+.prod-col img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    flex-shrink: 0;
+}
+
+.prod-col .info {
+    flex: 1;
+    min-width: 0;                    /* cho phép text dài bị cắt */
+}
+
+.prod-col .name {
+    margin: 0 0 4px 0;
+    font-weight: 16px;
+    line-height: 1.4;
+}
+
+.prod-col small {
+    color: #64748b;
+    font-size: 0.85rem;
+}
+
+/* ==================== TRẠNG THÁI ==================== */
+.status {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.status.Approved  { background: #d1fae5; color: #10b981; }
+.status.Rejected  { background: #fee2e2; color: #ef4444; }
+.status.pending   { background: #fef3c7; color: #d97706; }   /* đang chờ */
+
+/* ==================== NÚT NHẬN HÀNG ==================== */
+.btn-received {
+    background: #10b981;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.btn-received:hover {
+    background: #059669;
+    transform: translateY(-1px);
+}
+
+/* Hover hàng */
+.order-table tbody tr:hover {
+    background-color: #f8fafc;
+}

@@ -1,0 +1,508 @@
+
+/* --- --- */
+.admin-products-page {
+  width: 100%;
+  padding: 0 30px;
+  box-sizing: border-box;
+  margin-top: 10px;
+
+}
+.products-content {
+    width: 80%; /* Độ rộng 80% theo yêu cầu */
+    margin: 20px auto; /* Căn giữa trang */
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+}
+/* Tab Navigation */
+.tab-navigation { display: flex; gap: 20px; margin-bottom: 20px; }
+.tab-navigation button {padding: 10px 25px; border: none; background: #eee; cursor: pointer; font-weight: bold; border-radius: 5px;}
+.tab-navigation button.active { background: #000856; color: white; }
+
+/* Badges */
+.summary-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px;border: 1px solid #d6d6d6; padding: 10px; border-radius: 5px; }
+.badge { padding: 5px 15px; border-radius: 4px; color: white; font-weight: bold; }
+.badge-green { background: #34fa62; width: 170px; height: 70px; text-align: center; display: flex; flex-direction: column; justify-content: center; border: 2px solid #717171; border-radius: 5px; text-emphasis: none; font-size: 17px;}
+.badge-blue { background: #007bff; width: 170px; height: 70px; text-align: center; display: flex; flex-direction: column; justify-content: center; border-radius: 5px; border: 2px solid #717171;}
+
+/* Category Layout */
+.category-container { display: flex; gap: 50px; justify-content: center; border: 2px solid #d6d6d6; padding: 20px; border-radius: 5px;}
+.category-container h2 { text-align: center; margin: 0%; padding: 5px;}
+.category-container tr th  {font-weight: bold; font-size: 17px; padding: 5px;text-align: left;} /*  In đậm */
+.category-list, .category-actions { width: 45%; text-align: center; border: 1px solid #d6d6d6; border-radius: 5px; padding: 10px;}
+.category-list h2, .category-actions h1 { text-align: center;}
+.category-actions {
+  margin-top: 0%; /* Đảm bảo không có khoảng cách trên cùng */
+}
+.category-list table {text-align: center;}
+.category-list th.stt, .category-list td.stt {
+  padding-right: 10px !important;
+}
+.category-list th.name, .category-list td.name {
+  padding-left: 10px !important;
+}
+.category-actions input { width: 470px; padding: 10px; margin: 10px; border: 1px solid #ccc; border-radius: 5px; }
+.category-actions label { font-weight: bold; font-size: 16px; margin-top: 10px; display: block; text-align: left; margin-left: 5px;}
+
+/* Căn chỉnh lại nút thêm danh mục */ 
+/* admin-products.module.css */
+
+/* Bảng chính */
+.striped-table {
+  width: 100%;
+  border-collapse: collapse;       /* rất quan trọng để viền liền mạch và cột thẳng hàng */
+  margin: 16px 0;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Header */
+.striped-table thead th {
+  color: #ffffff;
+  font-weight: 600;
+  padding: 20px 25px; 
+  text-align: center;               /* căn giữa tiêu đề */
+  border-bottom: 2px solid #d1d9e0;
+  white-space: nowrap;
+}
+.striped-table .table-header-category {
+  background-color: #3a78a7; 
+  margin-bottom: 0%; 
+}
+.striped-table .category-name {
+  text-align: left; /* Căn trái cho cột tên loại sản phẩm */
+  padding-left: 20px; /* Thêm padding để căn chỉnh đẹp hơn */
+  margin-left: 200px; 
+}
+
+.striped-table tbody tr {
+  margin-top: 0%; 
+  margin-bottom: 0%; 
+  padding: 20px 25px; 
+}
+.striped-table tbody tr:hover {
+  background-color: aquamarine; 
+}
+
+/* Product Table */
+/* admin-products.module.css */
+/* Product Table */
+.product-table-items {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0 16px;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  display: table !important;
+  table-layout: auto;
+}
+
+.product-table-items thead {
+  background-color: #f0f4f8;
+}
+
+.product-table-items th {
+  padding: 14px 12px;
+  text-align: center;
+  font-weight: 600;
+  color: #ffffff;
+  border-bottom: 2px solid #ddd;
+  background-color: #3a78a7;
+}
+
+.product-table-items td {
+  padding: 14px 12px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  vertical-align: middle;
+  display: table-cell !important;
+}
+
+.product-table-items tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+.product-img-preview {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+/* Bảo vệ layout trên mọi thiết bị */
+.product-table-items,
+.product-table-items tr,
+.product-table-items td,
+.product-table-items th {
+  display: revert !important; /* hoặc table/table-row/table-cell */
+}
+
+/* Responsive - chỉ thu nhỏ kích thước, không phá layout */
+@media (max-width: 1024px) {
+  .product-table-items th, .product-table-items td {
+    padding: 12px 8px;
+    font-size: 0.95rem;
+  }
+  .product-img-preview {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+/* Nút trong cột Thao tác */
+.product-table-items .btn-yellow {
+  background: #ffc107;
+  color: #212529;
+  border: none;
+  padding: 8px 14px;
+  margin: 0 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.product-table-items .btn-red {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  margin: 0 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+/* Modal styles */
+.modal-overlay {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; z-index: 2000;
+}
+.modal-content {
+  background: white; padding: 30px; border-radius: 10px; text-align: center; width: 350px;
+}
+.modal-btns { display: flex; justify-content: space-around; margin-top: 20px; }
+.btn-confirm { background: #09fc1a; color: white; border: 2px solid #7c7c7c; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
+.btn-cancel { background: #ff3636; border: 2px solid #7c7c7c; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
+.modal-btns .btn-confirm .btn-cancel{ width: 200px; margin: 0%;  /* Đảm bảo các nút có cùng kích thước */ display: inline-block; /* Đảm bảo các nút nằm trên cùng một hàng */ display: flex; justify-content: center; align-items: center; margin: 0%; /* Căn giữa nội dung trong nút */ }
+.btn-group {
+  display: flex;
+  gap: 8px; /* khoảng cách giữa các nút */
+}
+
+.btn-group button {
+  width: 150px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+  margin-right: 10px; 
+  border: 1px solid #ffffff; 
+  border-radius: 7px; 
+  color: #333;  
+  font-size: 14px; 
+  font-weight: bold;  
+  text-align: center; 
+  margin-left: 20px;  
+}
+
+.btn-group .btn-add-category {
+  background: #01cf5a;
+}
+.btn-group .btn-edit-category {
+  background: #f7ff13;  
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+.btn-group .btn-delete-category{
+  background: #ff4d4f; 
+}
+
+.product-tools {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.product-tools .search-box input {
+  padding: 15px; border: 1px solid #ccc; border-radius: 5px; width: 500px;
+}
+/*btn-add-large nằm sát cùng bên phải*/
+.product-tools .btn-add-large {
+  background: #009b1f;
+  color: white;
+  padding: 15px 25px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: auto;
+  text-align: right;
+  margin-bottom: 10px;
+}
+/*Tính năng phân trang */ 
+/* PHÂN TRANG */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 0%;
+    gap: 8px;
+}
+
+.pagination button {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ddd;
+    background: white;
+    color: #666;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.pagination button:hover:not(:disabled) {
+    border-color: #000856;
+    color: #000856;
+    background: #f0f2ff;
+}
+
+.pagination button.active {
+    background: #000856;
+    color: white;
+    border-color: #000856;
+}
+
+.pagination button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    background: #f5f5f5;
+}
+
+/* Icon trong nút */
+.pagination svg {
+    font-size: 12px;
+}
+/* --- CSS CHO PRODUCT FORM (CHẾ ĐỘ CHỈNH SỬA/THÊM MỚI) --- */
+
+.product-form-page {
+    width: 100%;
+    padding: 20px 50px;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+}
+
+/* Tiêu đề và nút quay lại nằm bên trái */
+.form-header-align-left {
+    text-align: left;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #000856;
+    padding-bottom: 10px;
+}
+
+.form-header-align-left h1 {
+    color: #000856;
+    font-size: 28px;
+    margin-top: 10px;
+    text-transform: uppercase;
+}
+
+.btn-back {
+    background: none;
+    border: none;
+    color: #555;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.btn-back:hover {
+    color: #ff4d4f;
+}
+
+/* Toàn bộ Form đưa về giữa */
+.form-container-centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.admin-form-styled {
+    background: #ffffff;
+    padding: 40px;
+    width: 850px; /* Độ rộng form */
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Lưới nhập liệu (Grid) */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.form-group input, .form-group select {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 15px;
+    transition: border 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #000856;
+    outline: none;
+}
+
+/* Phần tải ảnh */
+.image-upload-section {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    background: #fcfcfc;
+}
+
+.preview-images {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+.preview-images img {
+    width: 50px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid #eee;
+}
+
+/* Phần mô tả chi tiết */
+.descriptions-area {
+    background: #f0f2f5;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.desc-box {
+    background: white;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-left: 5px solid #000856;
+    border-radius: 4px;
+}
+
+.desc-box input, .desc-box textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #eee;
+}
+
+.desc-box textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+/* Nút bấm cuối Form */
+.form-footer {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.btn-save {
+    background: #01cf5a;
+    color: white;
+    padding: 15px 40px;
+    border: none;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    transition: transform 0.2s, background 0.3s;
+}
+
+.btn-save:hover {
+    background: #01a849;
+    transform: translateY(-2px);
+}
+
+.btn-cancel {
+    background: #f1f1f1;
+    color: #333;
+    padding: 15px 40px;
+    border: none;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn-cancel:hover {
+    background: #ddd;
+}
+
+/* Nút thêm mô tả */
+.btn-add-desc {
+    background: #000856;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Trạng thái On/Off */
+.status-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: flex-start; /* Căn trái theo yêu cầu */
+    margin: 20px 0;
+    font-weight: bold;
+}
+.preview-item { position: relative; display: inline-block; margin: 5px; }
+.btn-remove-circle {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: red;
+  color: white;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
