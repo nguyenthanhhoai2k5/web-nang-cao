@@ -25,15 +25,25 @@ const MyOrders = () => {
         }
     };
 
-    const handleConfirmReceived = async (orderId) => {
+    const handleConfirmReceived = async (orderId, productId) => {
         try {
             const token = localStorage.getItem('token');
-            await axios.patch(`http://localhost:3000/api/orders/received/${orderId}`, {}, {
+            await axios.patch(`http://localhost:3000/api/orders/received/${orderId}`, { productId }, {
                 headers: { Authorization: `Bearer ${token}` }
             });
+
+            // Cập nhật trạng thái ở phía client cho từng item (không chuyển trang)
+            setOrders(prev => prev.map(o => {
+                if (o._id === orderId) {
+                    return {
+                        ...o,
+                        items: o.items.map(it => it.productId?.toString() === productId?.toString() ? { ...it, status: 'received' } : it)
+                    };
+                }
+                return o;
+            }));
+
             alert("Xác nhận đã nhận hàng!");
-            // Sau khi xác nhận thành công, chuyển đến trang đánh giá
-            navigate(`/review/${orderId}`);
         } catch (error) {
             alert("Có lỗi xảy ra khi xác nhận.");
         }
@@ -76,50 +86,68 @@ const MyOrders = () => {
                             <div className="order-date">
                                 Ngày đặt: {new Date(order.createdAt).toLocaleDateString('vi-VN')}
                             </div>
-                            <table className="order-table">
-                                <thead>
-                                    <tr>
-                                        <th>Sản phẩm</th>
-                                        <th>Giá</th>
-                                        <th>Số lượng</th>
-                                        <th>Tổng tiền</th>
-                                        <th>Trạng thái</th>
-                                        <th>Thao tác</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {order.items.map(item => (
-                                        <tr key={item.productId}>
-                                            <td className="prod-col">   
-                                                <img src={`http://localhost:3000${item.image}`} alt="" />  
-                                                <div className="info">
-                                                    <p className="name">{item.name}</p>
-                                                    <small>{item.category}</small>
-                                                </div>
-                                            </td>
-                                            <td>{item.price.toLocaleString()} Đ</td>
-                                            <td>{item.quantity}</td>
-                                            <td>{(item.price * item.quantity).toLocaleString()} Đ</td>
-                                            <td>
-                                                <span className={`status ${order.status}`}>
-                                                    {order.status === 'Approved' ? 'Đã duyệt' : 
-                                                     order.status === 'Rejected' ? 'Từ chối' : 'Đang chờ duyệt'}
-                                                </span>
-                                            </td>
-                                            <td>
-                                                {order.status === 'Approved' && (
-                                                    <button 
-                                                        className="btn-received"
-                                                        onClick={() => handleConfirmReceived(order._id)}
-                                                    >
-                                                        Nhận hàng
-                                                    </button>
-                                                )}
-                                            </td>
+                            <div className="content-cart">
+                                <table className="order-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Sản phẩm</th>
+                                            <th>Giá</th>
+                                            <th>Số lượng</th>
+                                            <th>Tổng tiền</th>
+                                            <th>Trạng thái</th>
+                                            <th>Thao tác</th>
                                         </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        {order.items.map(item => (
+                                            <tr key={item.productId}>
+                                                <td className="prod-col">
+                                                    <img src={`http://localhost:3000${item.image}`} alt="" />  
+                                                    <div className="info">
+                                                        <p className="name">{item.name}</p>
+                                                        <small>{item.category}</small>
+                                                    </div>
+                                                </td>
+                                                <td>{item.price.toLocaleString()} Đ</td>
+                                                <td>{item.quantity}</td>
+                                                <td>{(item.price * item.quantity).toLocaleString()} Đ</td>
+                                                <td>
+                                                    <span className={`status ${item.status || order.status}`}>
+                                                        {item.status === 'received' ? 'Đã nhận hàng' :
+                                                         item.status === 'approved' ? 'Đã duyệt' :
+                                                         item.status === 'rejected' ? 'Từ chối' :
+                                                         item.status === 'cancelled' ? 'Đã hủy' :
+                                                         order.status === 'approved' ? 'Đã duyệt' : 'Đang chờ duyệt'}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    {((item.status && item.status !== 'received') || order.status === 'approved') && item.status !== 'received' && (
+                                                        <button 
+                                                            className="btn-received"
+                                                            onClick={() => handleConfirmReceived(order._id, item.productId)}
+                                                        >
+                                                            Nhận hàng
+                                                        </button>
+                                                    )}
+
+                                                    {item.status === 'received' && (
+                                                        item.isReviewed ? (
+                                                            <button className="btn-reviewed" disabled>Đã đánh giá</button>
+                                                        ) : (
+                                                            <button
+                                                                className="btn-review"
+                                                                onClick={() => navigate(`/review/${order._id}?productId=${item.productId}`)}
+                                                            >
+                                                                Đánh giá sản phẩm
+                                                            </button>
+                                                        )
+                                                    )}
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     ))
                 )}

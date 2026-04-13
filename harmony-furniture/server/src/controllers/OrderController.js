@@ -181,19 +181,9 @@ class OrderController {
 
     async getRevenueStats(req, res) {
         try {
-            const { year } = req.query;
-            const startDate = new Date(`${year}-01-01`);
-            const endDate = new Date(`${year}-12-31T23:59:59`);
+            const { year, monthA, monthB } = req.query;
+            const yearNum = Number(year) || new Date().getFullYear();
 
-            // 1. Lấy tất cả đơn hàng đã duyệt trong năm
-            const orders = await Order.find({
-                status: 'approved',
-                createdAt: { $gte: startDate, $lte: endDate }
-            });
-
-            // 2. Tính toán doanh thu Top 4 sản phẩm theo từng tháng (cho biểu đồ)
-            // Logic này sẽ gom nhóm đơn hàng theo tháng và tính tổng (price * quantity)
-            
             // 3. Top 10 sản phẩm bán chạy
             const topProducts = await Order.aggregate([
                 { $match: { status: 'approved' } },
@@ -211,7 +201,30 @@ class OrderController {
                 { $limit: 10 }
             ]);
 
-            res.json({ topProducts, topCustomers });
+            // Chuẩn bị top 4 để vẽ biểu đồ (nếu ít thì lấy số có sẵn)
+            const top4 = topProducts.slice(0, 4);
+            const top4Ids = top4.map(p => p._id);
+
+            // Hàm tính doanh thu theo tháng cho các sản phẩm trong top4
+            const computeMonthRevenue = async (month) => {
+                if (!month) return top4.map(() => 0);
+                const monthNum = Number(month);
+                const agg = await Order.aggregate([
+                    { $match: { status: 'approved', $expr: { $and: [ { $eq: [ { $year: "$createdAt" }, yearNum ] }, { $eq: [ { $month: "$createdAt" }, monthNum ] } ] } } },
+                    { $unwind: "$items" },
+                    { $group: { _id: "$items.productId", revenue: { $sum: { $multiply: ["$items.price", "$items.quantity"] } } } },
+                    { $match: { _id: { $in: top4Ids } } }
+                ]);
+
+                const map = {};
+                agg.forEach(a => { map[a._id.toString()] = a.revenue; });
+                return top4.map(p => map[p._id.toString()] || 0);
+            };
+
+            const dataA = await computeMonthRevenue(monthA);
+            const dataB = await computeMonthRevenue(monthB);
+
+            res.json({ topProducts, topCustomers, dataA, dataB });
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
@@ -232,12 +245,19 @@ class OrderController {
     async markAsReceived(req, res) {
         try {
             const { orderId } = req.params;
-            const order = await Order.findOneAndUpdate(
-                { _id: orderId, userId: req.user.id },
-                { status: 'Completed' }, // Giả định 'Completed' là trạng thái đã nhận
-                { new: true }
-            );
+            const { productId } = req.body;
+            if (!productId) return res.status(400).json({ message: 'productId is required' });
+
+            const order = await Order.findOne({ _id: orderId, userId: req.user.id });
             if (!order) return res.status(404).json({ message: "Không tìm thấy đơn hàng" });
+
+            // Tìm item bên trong đơn và gán trạng thái received
+            const item = order.items.find(i => i.productId?.toString() === productId.toString());
+            if (!item) return res.status(404).json({ message: 'Không tìm thấy sản phẩm trong đơn hàng' });
+
+            item.status = 'received';
+            await order.save();
+
             res.status(200).json({ message: "Xác nhận nhận hàng thành công", order });
         } catch (error) {
             res.status(500).json({ message: "Lỗi hệ thống" });

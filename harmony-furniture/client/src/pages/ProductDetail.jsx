@@ -31,11 +31,75 @@ const DescriptionList = ({ data }) => {
   );
 };
 
-const Comments = () => {
+const Comments = ({ productId }) => {
+  const [reviews, setReviews] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedRating, setSelectedRating] = useState(0); // 0 = tất cả, 1-5 = tương ứng
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const res = await axios.get(`http://localhost:3000/api/reviews/product/${productId}`);
+        setReviews(res.data || []);
+      } catch (err) {
+        console.warn('Lỗi fetch reviews', err.message || err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    if (productId) fetchReviews();
+  }, [productId]);
+
+  const filtered = selectedRating === 0 ? reviews : reviews.filter(r => Number(r.rating) === Number(selectedRating));
+
+  const onSelectRating = (r) => setSelectedRating(r);
+
+  if (loading) return <div>Đang tải bình luận...</div>;
+  if (!reviews || reviews.length === 0) return <h3 className='infor-description-comments'>Chưa có bình luận nào ở đây</h3>;
+
   return (
     <div className="comments">
-      {/* Code bình luận: thêm fetch đánh giá sau */}
-      <h3 className='infor-description-comments'>Chưa có bình luận nào ở đây</h3>
+      <div className="review-filters">
+        <button className={`filter-btn ${selectedRating===0? 'active' : ''}`} onClick={() => onSelectRating(0)}>Tất cả đánh giá</button>
+        {[5,4,3,2,1].map(n => (
+          <button key={n} className={`filter-btn ${selectedRating===n? 'active' : ''}`} onClick={() => onSelectRating(n)}>{n} sao</button>
+        ))}
+      </div>
+
+      <div className="review-list">
+        {filtered.map(r => (
+          <div key={r._id} className="review-card">
+            <div className="review-card-date">{new Date(r.createdAt).toLocaleString()}</div>
+            <div className="review-card-top">
+              <div className="avatar-wrap">
+                {r.userId?.avatar ? (
+                  <img className="avatar" src={`http://localhost:3000${r.userId.avatar}`} alt={r.userId?.name || 'avatar'} />
+                ) : (
+                  <div className="avatar-fallback">👤</div>
+                )}
+              </div>
+              <div className="user-name">{r.userId?.name || r.userId?.fullname || 'Người dùng'}</div>
+            </div>
+
+            <div className="review-rating-stars">{'★'.repeat(r.rating)}{'☆'.repeat(5-r.rating)}</div>
+
+            <div className="review-text">{r.comment}</div>
+
+            {((r.images && r.images.length>0) || r.video) && (
+              <div className="review-media">
+                {r.images && r.images.map((img, i) => (
+                  <img key={i} src={`http://localhost:3000/${img.replace(/^\/+/, '')}`} alt={`rev-${i}`} className="review-media-img" />
+                ))}
+                {r.video && (
+                  <video className="review-media-video" controls>
+                    <source src={`http://localhost:3000/${r.video.replace(/^\/+/, '')}`} />
+                  </video>
+                )}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
@@ -291,7 +355,7 @@ const ProductDetail = () => {
               {activeTab === 'desc' ? (
               <DescriptionList data={product.descriptions} />
               ) : (
-              <Comments />
+              <Comments productId={product._id} />
               )}
           </div>
         </div>

@@ -52,6 +52,11 @@
 }
 
 /* ====================== ORDER TABLE - BẢO VỆ LAYOUT ====================== */
+.content-cart {
+    border: 1px solid #eee;
+    border-radius: 7px; 
+    padding: 0%; 
+}
 .order-table {
     width: 100%;
     border-collapse: collapse !important;
@@ -60,6 +65,7 @@
     border-radius: 8px;
     overflow: hidden;
     margin: 16px 0;
+    margin: 0%; 
 
     /* Buộc giữ layout table - rất quan trọng */
     display: table !important;
@@ -68,7 +74,7 @@
 
 .order-table thead,
 .order-table tbody {
-    display: table-header-group !important;
+    display: table-header-group !important; 
 }
 
 .order-table tr {

@@ -1,0 +1,173 @@
+.review-page {
+    width: 80%;
+    margin: 50px auto;
+    display: flex;
+    justify-content: center;
+}
+
+.review-container {
+    width: 100%;
+    max-width: 800px;
+    background: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.review-container h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.order-ref {
+    text-align: center;
+    color: #888;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+.product-summary {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid #f0f0f0;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.product-summary img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.product-meta { flex: 1; }
+.prod-name { font-weight: 600; color: #333; }
+.prod-category { color: #888; font-size: 13px; }
+.prod-price, .prod-qty, .prod-total { margin-left: 8px; color: #333; font-weight: 600; }
+.submit-error { color: #c00; text-align: center; margin-top: 8px; }
+
+/* Stars */
+.rating-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.stars {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.star-icon {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.star-icon:hover {
+    transform: scale(1.2);
+}
+
+.rating-text {
+    margin-left: 15px;
+    font-weight: bold;
+    color: #ffc107;
+    width: 100px;
+    text-align: left;
+}
+
+/* Comment Area */
+.comment-section textarea {
+    width: 100%;
+    height: 150px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    resize: none;
+    outline: none;
+    font-family: inherit;
+}
+
+.comment-section textarea:focus {
+    border-color: #ffc107;
+}
+
+/* Upload Section */
+.upload-section {
+    margin-top: 25px;
+}
+
+.upload-buttons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.upload-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #555;
+    transition: 0.3s;
+}
+
+.upload-label:hover {
+    background: #f9f9f9;
+    border-color: #ff4757;
+    color: #ff4757;
+}
+
+.preview-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.preview-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid #eee;
+}
+
+.video-preview {
+    width: 80px;
+    height: 80px;
+    background: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+    text-align: center;
+    padding: 5px;
+}
+
+/* Submit Button */
+.btn-submit-review {
+    width: 100%;
+    background: #333;
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 30px;
+    transition: background 0.3s;
+}
+
+.btn-submit-review:hover {
+    background: #ff4757;
+}

@@ -295,6 +295,99 @@
   min-height: 200px;
 }
 
+/* Comments / Reviews styles */
+.comments {
+  font-size: 24px; /* Toàn bộ chữ 24px */
+}
+
+.review-filters {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.filter-btn {
+  padding: 8px 14px;
+  border-radius: 12px;
+  border: 1px solid #dcdcdc;
+  background: white;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.filter-btn.active {
+  background: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.review-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.review-card {
+  border: 2px solid rgba(0,0,0,0.06);
+  border-radius: 20px;
+  padding: 18px;
+  background: #ffffff;
+}
+
+.review-card-date {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.review-card-top {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.avatar-wrap { width: 56px; height: 56px; }
+.avatar {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #eee;
+}
+.avatar-fallback {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#f0f0f0;
+  font-size:26px;
+}
+
+.user-name {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.review-rating-stars {
+  color: #ffbf00; /* vàng */
+  margin: 8px 0;
+  font-size: 22px;
+}
+
+.review-text {
+  margin: 10px 0 12px 0;
+  line-height: 1.3;
+}
+
+.review-media { display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+.review-media-img { width: 160px; height: 120px; object-fit: cover; border-radius:8px; }
+.review-media-video { width: 320px; max-width:100%; border-radius:8px; }
+
 /* Responsive */
 @media (max-width: 992px) {
   .detail-main-row {

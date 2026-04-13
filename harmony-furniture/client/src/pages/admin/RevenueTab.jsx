@@ -43,7 +43,8 @@ const RevenueTab = () => {
             year: selectedYear,
             monthA: monthA,
             monthB: monthB
-          }
+          },
+          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
         });
         
         // Cập nhật state với dữ liệu thực từ Backend
@@ -78,6 +79,32 @@ const RevenueTab = () => {
       hoverOffset: 4
     }]
   });
+
+  // Các màu dùng cho legend/tên sản phẩm dưới biểu đồ
+  const legendColors = ["#000856", "#01cf5a", "#ff4d4f", "#f7ff13"];
+
+  // Options để chỉnh legend hiển thị ở lề trái và tooltip hiển thị đầy đủ tên
+  const chartOptions = {
+    plugins: {
+      // Tắt legend mặc định (đã hiển thị danh sách sản phẩm tùy chỉnh phía dưới)
+      legend: {
+        display: false
+      },
+      title: {
+        display: false
+      },
+      tooltip: {
+        callbacks: {
+          label: function(context) {
+            const label = context.label || '';
+            const value = context.parsed || 0;
+            return `${label}: ${value}`;
+          }
+        }
+      }
+    },
+    maintainAspectRatio: false
+  };
 
   return (
     <div className="revenue-content" style={{ width: "80%", margin: "0 auto" }}>
@@ -119,8 +146,18 @@ const RevenueTab = () => {
             <div className="chart-item" style={{ flex: 1, textAlign: 'center' }}>
               <h3>Biểu đồ Tháng {monthA}</h3>
               {hasData(stats.dataA) ? (
-                <div style={{ width: '300px', margin: '0 auto' }}>
-                  <Pie data={chartData(`Tháng ${monthA}`, stats.dataA)} />
+                <div style={{ width: '300px', height: '320px', margin: '0 auto' }}>
+                  <Pie data={chartData(`Tháng ${monthA}`, stats.dataA)} options={chartOptions} />
+
+                  {/* Hiển thị tên sản phẩm dưới biểu đồ với màu tương ứng */}
+                  <div style={{ marginTop: 12, textAlign: 'left' }}>
+                    {stats.topProducts.slice(0,4).map((p, idx) => (
+                      <div key={p._id || idx} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }} title={p.name}>
+                        <div style={{ width: 12, height: 12, background: legendColors[idx] || '#ddd', borderRadius: 2 }} />
+                        <div style={{ fontSize: 12, maxWidth: 240, whiteSpace: 'normal', overflow: 'hidden', textOverflow: 'ellipsis' }}>{p.name}</div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               ) : (
                 <div className="empty-box">Không có dữ liệu</div>
@@ -130,16 +167,24 @@ const RevenueTab = () => {
             <div className="chart-item" style={{ flex: 1, textAlign: 'center' }}>
               <h3>Biểu đồ Tháng {monthB}</h3>
               {hasData(stats.dataB) ? (
-                <div style={{ width: '300px', margin: '0 auto' }}>
-                  <Pie data={chartData(`Tháng ${monthB}`, stats.dataB)} />
+                <div style={{ width: '300px', height: '320px', margin: '0 auto' }}>
+                  <Pie data={chartData(`Tháng ${monthB}`, stats.dataB)} options={chartOptions} />
+
+                  {/* Hiển thị tên sản phẩm dưới biểu đồ với màu tương ứng */}
+                  <div style={{ marginTop: 12, textAlign: 'left' }}>
+                    {stats.topProducts.slice(0,4).map((p, idx) => (
+                      <div key={p._id || idx} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }} title={p.name}>
+                        <div style={{ width: 12, height: 12, background: legendColors[idx] || '#ddd', borderRadius: 2 }} />
+                        <div style={{ fontSize: 12, maxWidth: 240, whiteSpace: 'normal', overflow: 'hidden', textOverflow: 'ellipsis' }}>{p.name}</div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               ) : (
                 <div className="empty-box">Không có dữ liệu</div>
               )}
             </div>
           </div>
-
-          
 
           {/* Bảng xếp hạng Top 10 */}
           <div className="top-rankings" style={{ display: "flex", gap: "40px", marginTop: "50px" }}>

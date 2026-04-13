@@ -10,6 +10,7 @@ import cartRoutes from './src/routes/cartRoutes.js'; // route giỏ hàng
 import orderRoutes from './src/routes/orderRoutes.js'; // route đơn hàng
 import invoiceRoutes from './src/routes/InvoiceRoutes.js';
 import userRoutes from './src/routes/userRoutes.js'; 
+import reviewRoutes from './src/routes/reviewRoutes.js';
 
 const app = express();
 const PORT = 3000; 
@@ -28,7 +29,7 @@ app.use('/api/orders', orderRoutes); // route đơn hàng
 app.use('/uploads', express.static('uploads')); // Cho phép truy cập thư mục uploads để lấy ảnh sản phẩm
 app.use('/api/invoices', invoiceRoutes);
 app.use('/api/users', userRoutes);    // Dùng cho quản lý tài khoản (Đường dẫn sẽ là /api/users)
-app.use(cors());
+app.use('/api/reviews', reviewRoutes); // Route cho đánh giá sản phẩm
 
 app.get('/', (req, res) => {
     res.send('Chào mừng bạn đến với Harmony Furniture API!');

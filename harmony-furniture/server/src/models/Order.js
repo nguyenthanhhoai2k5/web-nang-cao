@@ -13,10 +13,11 @@ const orderSchema = new mongoose.Schema({
         price: Number, // Giá đã tính giảm giá
         discount: { type: Number, default: 0 }, // % giảm giá
         quantity: Number,
-        image: String
+        image: String,
+        status: { type: String, enum: ['pending', 'approved', 'rejected', 'cancelled', 'received'], default: 'pending' }
     }],
     totalAmount: Number,
-    status: { type: String, enum: ['pending', 'approved', 'rejected', 'cancelled'], default: 'pending' },
+    status: { type: String, enum: ['pending', 'approved', 'rejected', 'cancelled', 'completed'], default: 'pending' },
     isViewed: { type: Boolean, default: false }
 }, { timestamps: true });
 

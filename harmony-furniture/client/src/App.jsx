@@ -30,6 +30,7 @@ import Checkout from './pages/user/Checkout';
 import AboutUs from './pages/user/AboutUs';
 import Profile from './pages/user/Profile'; // trang thông tin cá nhân
 import MyOrders from './pages/user/MyOrders'; // trang lịch sử đơn hàng
+import Review from './pages/user/Review'; // trang đánh giá sản phẩm sau khi nhận hàng
 
 function GuestLayout() {
   return (
@@ -84,6 +85,7 @@ function App() {
           <Route path="/products" element={<ProductList />} />
           <Route path="/about-us" element={<AboutUs />} /> {/* Thêm route cho trang Giới thiệu */}
           <Route path="/profile" element={<Profile />} /> {/* Thêm route cho trang Thông tin cá nhân */}
+          <Route path="/review/:orderId" element={<Review />} /> {/* Thêm route cho trang Đánh giá */}
           
           {/* MỚI: Trang chi tiết sản phẩm cho User */}
           <Route path="/product-detail/:id" element={<ProductDetailUser role="user" />} />

@@ -26,6 +26,8 @@ router.post('/create', optionalAuth, OrderController.createOrder);
 router.get('/admin/all', verifyToken, isAdmin, OrderController.getAllOrders);
 router.patch('/admin/update/:id', verifyToken, isAdmin, OrderController.updateStatus);
 router.get('/admin/stats', verifyToken, isAdmin, OrderController.getAdminOrders);
+// Route lấy thống kê doanh thu (Top items/customers + monthly data)
+router.get('/revenue-stats', verifyToken, isAdmin, OrderController.getRevenueStats);
 
 // Route public - ĐẶT SAU CÙNG
 router.get('/', OrderController.getAllOrders);
